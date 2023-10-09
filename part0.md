@@ -1,3 +1,4 @@
+$$Exercise 0.1, 0.2, 0.3: Reading Done$$
 $$Exercise 0.4$$
 ``` mermaid
 sequenceDiagram
