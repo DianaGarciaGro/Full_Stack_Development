@@ -1,35 +1,83 @@
+$$Exercise 0.4$$
+``` mermaid
 sequenceDiagram
-    participant browser
-    participant server
+    participant Browser
+    participant Server
 
-    Note right of browser: User writes a note and clicks "Save"
+    Note right of Browser: User writes a note and clicks "Save"
 
-    browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-    activate server
-    Note over server: Server process the  post request and saves the new note.
-    server -->> browser: 200 ok
-    desactivate server
+    Browser ->> Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate Server
+    Note over Server: Server process the  post request and saves the new note.
+    Server -->> Browser: 200 ok
+    deactivate Server
 
-    browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/new_note
-    activate server
-    server -->> browser: HTML document
-    desactivate server
+    Browser ->> Server: GET https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate Server
+    Server -->> Browser: HTML document
+    deactivate Server
 
-    browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
-    activate server
-    server -->> browser: css file
-    desactivate server
+    Browser ->> Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Server -->> Browser: css file
+    deactivate Server
 
-    browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    activate server
-    server -->> browser: JavaScript file
-    desactivate server
+    Browser ->> Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate Server
+    Server -->> Browser: JavaScript file
+    deactivate Server
 
-    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+    Note right of Browser: The browser starts executing the JavaScript code that fetches the JSON from the server
 
-    browser ->> server: https://studies.cs.helsinki.fi/exampleapp/data.json
-    activate server
-    server -->> browser: data json file
-    desactivate server: [{ "content": "New Note", "date": "2023-1-1" }, ... ]
+    Browser ->> Server: https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server -->> Browser: Data JSON file
+    deactivate Server
 
-    Note right of browser: Browser executes the callback function that renders the updated notes
+    Note right of Browser: Browser executes the callback function that renders the updated notes
+```
+
+$$Exercise 0.5$$
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User ->> Browser: Navigate to SPA URL
+    Note right of Browser: Browser sends GET request for SPA
+
+    Browser ->> Server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate Server
+    Server -->> Browser: HTML, CSS, and JavaScript for SPA
+    deactivate Server
+
+    Note right of Browser: Browser renders SPA and executes JavaScript
+    
+    Note right of Browser: JavaScript fetches initial note data
+
+    Browser ->> Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server -->> Browser: JSON data for notes
+    deactivate Server
+
+    Note right of Browser: Browser updates the UI with the fetched notes
+```
+
+$$Excersie 0.6$$
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Enter text and click Save
+    Note right of Browser: JavaScript function triggered to save note
+
+    Browser->>Server: POST new note data to API
+    activate Server
+    Server-->>Browser: Acknowledge receipt and return new note ID
+    deactivate Server
+
+    Note right of Browser: JavaScript updates UI to include new note
+```
